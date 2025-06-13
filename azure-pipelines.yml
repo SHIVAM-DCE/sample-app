@@ -6,7 +6,7 @@ trigger:
 variables:
   azureServiceConnection: MyAzureConnection
   appName: sample-nodejs-app
-  resourceGroup: my-resource-group
+  resourceGroup: nodejsapp
   packageFolder: $(System.DefaultWorkingDirectory)/sample-node-app
   slotName: staging
 
