@@ -7,6 +7,7 @@ variables:
   azureServiceConnection: sample-nodejs-app-serviceconnection
   appName: sample-nodejs-app
   resourceGroup: nodejsapp
+  packageFolder: $(System.DefaultWorkingDirectory)/sample-node-app
   slotName: staging
 
 stages:
@@ -15,30 +16,24 @@ stages:
     jobs:
       - job: Build
         pool:
-          name: ubuntu-latest   # ✅ This must match your self-hosted agent pool name
+           name: ubuntu-latest
         steps:
-          - checkout: self
-
           - task: NodeTool@0
             inputs:
               versionSpec: 18.x
-
+          - checkout: self
           - script: |
-              echo "Working directory:"
-              dir $(Build.SourcesDirectory)
-              cd $(Build.SourcesDirectory)/sample-app
+              cd sample-app
               npm install
               npm test
-            displayName: 'Install & Run Tests'
-
+            displayName: Install & Run Tests
           - task: ArchiveFiles@2
             inputs:
-              rootFolderOrFile: $(Build.SourcesDirectory)/sample-app
+              rootFolderOrFile: sample-node-app
               includeRootFolder: false
               archiveType: zip
               archiveFile: $(Build.ArtifactStagingDirectory)/app.zip
               replaceExistingArchive: true
-
           - publish: $(Build.ArtifactStagingDirectory)/app.zip
             artifact: drop
 
@@ -48,7 +43,7 @@ stages:
     jobs:
       - deployment: DeployWebApp
         pool:
-          name: ubuntu-latest   # ✅ Use same pool name here
+          name: ubuntu-latest
         environment: production
         strategy:
           runOnce:
