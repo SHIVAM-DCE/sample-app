@@ -4,7 +4,7 @@ trigger:
       - main
 
 variables:
-  azureServiceConnection: github.com_SHIVAM-DCE
+  azureServiceConnection: sample-nodejs-app-serviceconnection
   appName: sample-nodejs-app
   resourceGroup: nodejsapp
   packageFolder: $(System.DefaultWorkingDirectory)/sample-node-app
