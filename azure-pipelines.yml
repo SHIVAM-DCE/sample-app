@@ -7,7 +7,7 @@ variables:
   azureServiceConnection: sample-nodejs-app-serviceconnection
   appName: sample-nodejs-app
   resourceGroup: nodejsapp
-  packageFolder: $(System.DefaultWorkingDirectory)/sample-node-app
+ #packageFolder: $(System.DefaultWorkingDirectory)/sample-node-app
   slotName: staging
 
 stages:
@@ -29,7 +29,7 @@ stages:
             displayName: Install & Run Tests
           - task: ArchiveFiles@2
             inputs:
-              rootFolderOrFile: sample-node-app
+              rootFolderOrFile: $(Build.SourcesDirectory)/sample-app 
               includeRootFolder: false
               archiveType: zip
               archiveFile: $(Build.ArtifactStagingDirectory)/app.zip
