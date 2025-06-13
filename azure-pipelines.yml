@@ -15,7 +15,7 @@ stages:
     jobs:
       - job: Build
         pool:
-          name: Default   # ✅ This must match your self-hosted agent pool name
+          name: ubuntu-latest   # ✅ This must match your self-hosted agent pool name
         steps:
           - checkout: self
 
@@ -48,7 +48,7 @@ stages:
     jobs:
       - deployment: DeployWebApp
         pool:
-          name: Default   # ✅ Use same pool name here
+          name: ubuntu-latest   # ✅ Use same pool name here
         environment: production
         strategy:
           runOnce:
