@@ -23,7 +23,7 @@ stages:
               versionSpec: 18.x
           - checkout: self
           - script: |
-              cd sample-node-app
+              cd sample-app
               npm install
               npm test
             displayName: Install & Run Tests
