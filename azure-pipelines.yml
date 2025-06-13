@@ -7,8 +7,8 @@ variables:
   azureServiceConnection: sample-nodejs-app-serviceconnection
   appName: sample-nodejs-app
   resourceGroup: nodejsapp
- #packageFolder: $(System.DefaultWorkingDirectory)/sample-node-app
-  slotName: staging
+  packageFolder: $(System.DefaultWorkingDirectory)/sample-app
+  slotName: production
 
 stages:
   - stage: BuildAndTest
@@ -23,12 +23,13 @@ stages:
               versionSpec: 18.x
           - checkout: self
           - script: |
+              cd sample-app
               npm install
               npm test
             displayName: Install & Run Tests
           - task: ArchiveFiles@2
             inputs:
-              rootFolderOrFile: $(Build.SourcesDirectory) 
+              rootFolderOrFile: sample-app 
               includeRootFolder: false
               archiveType: zip
               archiveFile: $(Build.ArtifactStagingDirectory)/app.zip
@@ -57,5 +58,5 @@ stages:
                     appName: $(appName)
                     package: $(Pipeline.Workspace)/drop/app.zip
                     resourceGroupName: $(resourceGroup)
-                    # deployToSlotOrASE: true
+                    deployToSlotOrASE: false
                     # slotName: $(slotName)
