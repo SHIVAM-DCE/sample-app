@@ -16,7 +16,7 @@ stages:
     jobs:
       - job: Build
         pool:
-          name: ubuntu-latest
+          vmImage: Default
         steps:
           - task: NodeTool@0
             inputs:
@@ -43,7 +43,7 @@ stages:
     jobs:
       - deployment: DeployWebApp
         pool:
-          name: ubuntu-latest
+          vmImage: Default
         environment: production
         strategy:
           runOnce:
