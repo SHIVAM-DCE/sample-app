@@ -43,7 +43,7 @@ stages:
     jobs:
       - deployment: DeployWebApp
         pool:
-          vmImage: Default
+          name: ubuntu-latest
         environment: production
         strategy:
           runOnce:
