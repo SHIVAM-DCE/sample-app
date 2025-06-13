@@ -57,5 +57,5 @@ stages:
                     appName: $(appName)
                     package: $(Pipeline.Workspace)/drop/app.zip
                     resourceGroupName: $(resourceGroup)
-                    deployToSlotOrASE: true
-                    slotName: $(slotName)
+                    # deployToSlotOrASE: true
+                    # slotName: $(slotName)
